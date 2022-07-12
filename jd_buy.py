@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 """
-cron: 10,40 * * * * *
+cron: 10,30,50 * * * * *
 new Env('京东抢购商品程序');
 """
 import json
@@ -674,6 +674,3 @@ add_item_to_cart(skuId)
 inStockSkuid = check_stock(checksession, skuids, area)
 # 自动下单模块
 V3AutoBuy(inStockSkuid)
-# 休眠模块
-timesleep = random.randint(10, 30)
-time.sleep(timesleep)
