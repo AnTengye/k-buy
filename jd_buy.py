@@ -668,8 +668,9 @@ skuId = skuids[0]
 validate_cookies()
 getUsername()
 select_all_cart_item()
-remove_item()
-add_item_to_cart(skuId)
+# 如果没有加入购物车，则需要开启
+# remove_item()
+# add_item_to_cart(skuId)
 # 检查库存模块
 inStockSkuid = check_stock(checksession, skuids, area)
 # 自动下单模块
