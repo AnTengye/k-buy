@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
 """
-cron: 30 * * * * *
+cron: 10,40 * * * * *
 new Env('京东抢购商品程序');
 """
-import hashlib
 import json
 import os
 import random
@@ -27,6 +26,7 @@ def parse_json(s):
     begin = s.find('{')
     end = s.rfind('}') + 1
     return json.loads(s[begin:end])
+
 
 def response_status(resp):
     if resp.status_code != requests.codes.OK:
@@ -664,29 +664,16 @@ _setDNSCache()
 if len(skuids) != 1:
     print('请准备一件商品')
 skuId = skuids[0]
-flag = 1
-while (1):
-    try:
-        # 初始化校验
-        if flag == 1:
-            print('当前是V3版本')
-            validate_cookies()
-            getUsername()
-            select_all_cart_item()
-            remove_item()
-            add_item_to_cart(skuId)
-        print(f'第{flag}次')
-        flag += 1
-        # 检查库存模块
-        inStockSkuid = check_stock(checksession, skuids, area)
-        # 自动下单模块
-        V3AutoBuy(inStockSkuid)
-        # 休眠模块
-        timesleep = random.randint(10, 30)
-        time.sleep(timesleep)
-        # 校验是否还在登录模块
-        if flag % 100 == 0:
-            V3check(skuId)
-    except Exception as e:
-        print(traceback.format_exc())
-        time.sleep(10)
+# 初始化校验
+validate_cookies()
+getUsername()
+select_all_cart_item()
+remove_item()
+add_item_to_cart(skuId)
+# 检查库存模块
+inStockSkuid = check_stock(checksession, skuids, area)
+# 自动下单模块
+V3AutoBuy(inStockSkuid)
+# 休眠模块
+timesleep = random.randint(10, 30)
+time.sleep(timesleep)
