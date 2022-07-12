@@ -1,0 +1,4 @@
+beautifulsoup4==4.11.1
+requests==2.22.0
+pillow==9.1.1
+ddddocr~=1.4.3
