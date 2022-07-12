@@ -65,12 +65,15 @@ global cookies_String, area, skuidsString, skuids, eid, fp, payment_pwd
 def getconfig():
     global cookies_String, area, skuidsString, skuids, eid, fp, payment_pwd
     cookies_String = os.getenv('JD_BUY_COOKIE')
+    if not cookies_String:
+        print('缺少环境变量JD_BUY_COOKIE')
+        sys.exit(1)
     area = os.getenv('JD_BUY_AREA')
     skuidsString = os.getenv('JD_BUY_SKU')
     payment_pwd = os.getenv('JD_BUY_PW')
     skuids = str(skuidsString).split(',')
     if len(skuids[0]) == 0:
-        print('请在configDemo.ini文件中输入你的商品id')
+        print('缺少环境变量JD_BUY_SKU')
         sys.exit(1)
 
 
@@ -490,7 +493,8 @@ def check_stock(checksession, skuids, area):
     for sku_id, info in parse_json(resp.text).items():
         sku_state = info.get('skuState')  # 商品是否上架
         stock_state = info.get('StockState')  # 商品库存状态
-        if sku_state == 1 and stock_state in (33, 40):
+        # 36是采购中
+        if sku_state == 1 and stock_state in (33, 36, 40):
             inStockSkuid.append(sku_id)
         if sku_state == 0:
             unUseSkuid.append(sku_id)
