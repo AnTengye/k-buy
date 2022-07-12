@@ -28,13 +28,6 @@ def parse_json(s):
     end = s.rfind('}') + 1
     return json.loads(s[begin:end])
 
-
-def getconfigMd5():
-    with open('configDemo.ini', 'r', encoding='utf-8') as f:
-        configText = f.read()
-        return hashlib.md5(configText.encode('utf-8')).hexdigest()
-
-
 def response_status(resp):
     if resp.status_code != requests.codes.OK:
         print('Status: %u, Url: %s' % (resp.status_code, resp.url))
@@ -84,7 +77,6 @@ def getconfig():
 # 初次
 configTime = int(time.time())
 getconfig()
-configMd5 = getconfigMd5()
 message = message()
 
 is_Submit_captcha = False
