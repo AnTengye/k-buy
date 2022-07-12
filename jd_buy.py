@@ -433,6 +433,7 @@ def item_removed(sku_id):
 
 def buyMask(sku_id) -> bool:
     risk_control, detail = get_checkout_page_detail()
+    print(f"当前订单状态：{risk_control}")
     if risk_control == '刷新太频繁了':
         return False
     return submit_order(session, risk_control, detail, sku_id, skuids, submit_Time, encryptClientInfo,
@@ -462,7 +463,7 @@ def V3AutoBuy(inStockSkuid):
             if item_removed(skuId):
                 message.send("商品下单失败，重新处理")
             else:
-                print('[%s]已下柜商品', skuId)
+                print(f'[skuId]已下柜商品')
                 sys.exit(1)
 
 
@@ -494,6 +495,7 @@ def check_stock(checksession, skuids, area):
         sku_state = info.get('skuState')  # 商品是否上架
         stock_state = info.get('StockState')  # 商品库存状态
         # 36是采购中
+        print(f"当前商品状态：{info.get('StockStateName')}")
         if sku_state == 1 and stock_state in (33, 36, 40):
             inStockSkuid.append(sku_id)
         if sku_state == 0:
