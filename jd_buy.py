@@ -1,8 +1,8 @@
-# -*- coding=utf-8 -*-
-'''
-京东抢购商品程序
-通过商品的skuid、地区id抢购
-'''
+# -*- coding:utf-8 -*-
+"""
+cron: 30 * * * * *
+new Env('京东抢购商品程序');
+"""
 import hashlib
 import json
 import os
